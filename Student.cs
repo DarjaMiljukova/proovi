@@ -59,6 +59,8 @@ namespace proovi
         private int _likes;
 
 
+
+
         public Message() { }
 
         public Message(string content, string author, DateTime time)
@@ -89,6 +91,9 @@ namespace proovi
             _likes++;
         }
 
+
+
+        //выдача лайков
         public double GetPopularity()
         {
             TimeSpan elapsed = DateTime.Now - _time;
@@ -99,6 +104,8 @@ namespace proovi
             return _likes / elapsed.TotalSeconds;
         }
 
+
+        //информация о сообщении: сообщение, автор, время
         public void ShowMessageInfo()
         {
             Console.WriteLine(Content);
@@ -108,7 +115,7 @@ namespace proovi
 
 
 
-
+        //сравнение популярности сообщения
         public string GetPopularityInfo(double esimene, double teine)
         {
             string rezult = " ";
@@ -123,7 +130,8 @@ namespace proovi
             return rezult;
         }
 
-        public static string GetMostPopularMessage(List<Message> messages)
+        public static string GetMostPopularMessage(List<Message> messages)   
+
         {
             string result = " ";
             double maxPopularity = 0;
@@ -137,6 +145,27 @@ namespace proovi
                 }
             }
             return result;
+        }
+
+
+
+        //создание самостоятельных сообщений, авторов и лайков
+        public Message CreateMess()
+        {
+            Random rnd = new Random();
+            Console.WriteLine("Sõnum: ");
+            string content = Console.ReadLine();
+            Console.WriteLine("Autor: ");
+            string author = Console.ReadLine();
+            Console.WriteLine("Soovinud like: ");
+            int likes = int.Parse(Console.ReadLine());
+            int time = -1 * rnd.Next(0, 100);
+            Message m = new Message(content, author, DateTime.Now.AddSeconds(time));
+            for (int l = 0; l < likes; l++)
+            {
+                m.AddLike();
+            }
+            return m;
         }
     }
 }

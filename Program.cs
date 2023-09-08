@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using proovi;
+
+
+
 //public class StudentMain
 //{
 //    public static void Main()
@@ -30,20 +33,30 @@ public class Program
         int MCount=r.Next(1,10);
         for (int i = 0; i < MCount; i++) //начало цикла, запрос на
         {
-            Console.WriteLine("Sms: ");
-            string c = Console.ReadLine();
-            Console.WriteLine("Autor: ");
-            string a = Console.ReadLine();
-            int t = -1*r.Next(1,1000000);
-            DateTime dhm= DateTime.Now.Date.AddSeconds(t);
-            m = new Message(c, a, dhm);
+            
             for (int j = 0; j<r.Next(1,1000);j++)
             {
                 m.AddLike();
             }
-            list.Add(m);
-            m.ShowMessageInfo();
+            Message message = new Message();
+            message = message.CreateMess();
+            list.Add(message);
+            message.ShowMessageInfo();
         }
-        Console.WriteLine(m.GetPopularityInfo(list));
+
+
+        //public static Message CreateRandomStudent(string name, DateTime time, Random random)
+        //{
+        //    string content = Guid.NewGuid().ToString().Substring(0, 10);
+        //    int likes = random.Next(0, 100);
+
+        //    Message student = new Message(content, name, time);
+        //    for (int i = 0; i < likes; i++)
+        //    {
+        //        student.AddLike();
+        //    }
+
+        //    return student;
+        //}
     }
 }
